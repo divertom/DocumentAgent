@@ -1,0 +1,28 @@
+name: DocumentAgent
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      # LangChain ecosystem
+      - langchain==0.2.*
+      - langchain-community==0.2.*
+      - langchain-ollama==0.1.*
+      - chromadb==0.5.*
+
+      # Document loaders
+      - pypdf==4.3.*
+      - unstructured==0.14.*   # optional: parsing HTML/complex docs
+
+      # Utilities
+      - requests==2.32.*
+      - tiktoken==0.7.*
+      - python-dotenv==1.0.*   # env support
+
+      # API server
+      - fastapi==0.112.*
+      - uvicorn==0.30.*
+
+
