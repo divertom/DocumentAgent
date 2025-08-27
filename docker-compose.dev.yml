@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # DocumentAgent Web Application (Development)
+  documentagent:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - ./uploads:/app/uploads
+      - ./document_vector_db:/app/document_vector_db
+    environment:
+      - FLASK_APP=web_app.py
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - VECTOR_DB_PATH=/app/document_vector_db
+      - UPLOAD_FOLDER=/app/uploads
+      - OLLAMA_HOST=http://ollama:11434
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    networks:
+      - documentagent-network
+    command: ["python", "-m", "flask", "run", "--host=0.0.0.0", "--port=5000", "--reload"]
+
+  # Ollama LLM Service
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    restart: unless-stopped
+    networks:
+      - documentagent-network
+
+volumes:
+  ollama_data:
+
+networks:
+  documentagent-network:
+    driver: bridge
