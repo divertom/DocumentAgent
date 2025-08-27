@@ -4,6 +4,33 @@ This project has been refactored to separate concerns between generic web conten
 
 ## Architecture Changes
 
+### 0. Web Application (`web_app.py`)
+
+A modern web interface for DocumentAgent that provides:
+
+**Key Features:**
+- **PDF Upload & Processing**: Drag-and-drop PDF upload with automatic text extraction
+- **Vector Database Storage**: Documents are processed and stored in a Chroma vector database
+- **AI Chat Interface**: Chat with your documents using local Ollama models
+- **Modern UI**: Responsive design with Tailwind CSS and Font Awesome icons
+- **Document Management**: View, search, and delete processed documents
+- **Real-time Processing**: Live feedback during PDF processing and chat
+
+**Quick Start:**
+```bash
+# Install dependencies
+conda env create -f environment.yml
+conda activate DocumentAgent
+
+# Or use the installer script
+python install_dependencies.py
+
+# Start the web application
+python web_app.py
+
+# Open http://localhost:5000 in your browser
+```
+
 ### 1. Generic Web Content Scraper (`web_content_scraper.py`)
 
 The `osha_consumer.py` has been refactored into a generic `WebContentScraper` class that can handle any website:
