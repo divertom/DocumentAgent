@@ -47,6 +47,7 @@ Thumbs.db
 # DocumentAgent specific
 uploads/
 document_vector_db/
+DocumentVector_db/
 ollama_data/
 *.log
 .env
